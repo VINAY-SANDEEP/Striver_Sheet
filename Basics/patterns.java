@@ -1,4 +1,5 @@
-public class Main{
+package Basics;
+public class patterns{
     public static void main(String[] args){
         pattern17(5);
     }
