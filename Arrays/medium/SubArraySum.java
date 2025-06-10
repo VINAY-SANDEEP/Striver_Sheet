@@ -34,7 +34,6 @@ public class SubArraySum {
 
             map.put(prefixSum, map.getOrDefault(prefixSum, 0) + 1);
         }
-
         return count;
     }
 }
