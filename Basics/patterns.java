@@ -228,9 +228,11 @@ public class patterns {
     public static void pattern18(int n){
         System.out.println();
         System.out.println("Pattern 18");
-        for (int i = 0; i < n; i++) {
-            for (char ch = (char)('E'- i); ch <= 'E'; ch++) {
-                System.out.print(ch);
+        for (int i = 1; i <= n; i++) {
+            char ch = (char) ('A' + n - 1);
+            for (int j = 1; j <= i; j++) {
+                System.out.print(ch + " ");
+                ch--;
             }
             System.out.println();
         }
