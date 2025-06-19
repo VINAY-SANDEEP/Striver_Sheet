@@ -6,17 +6,17 @@ public class SecondElement {
         System.out.println(Second(arr));
     }
     public static int Second(int[] nums){
-        int max = 0;
-        int second = 0;
-          for (int i = 0; i < nums.length; i++) {
-            if (nums[i]>max) {
+        int max = Integer.MIN_VALUE;
+        int second = Integer.MIN_VALUE;
+        for(int i = 0 ; i < arr.length ; i++){
+            if(max < arr[i]){
                 second = max;
-                max = nums[i];
+                max = arr[i];
             }
-            if (nums[i] > second && nums[i] < max) {
-                second = nums[i];
+             else if (arr[i] > second && arr[i] != max) {
+                second = arr[i];
             }
           }
-          return second;
+          return (second==Integer.MIN_VALUE)?-1:second;
     }
 }
