@@ -1,30 +1,50 @@
 const express = require('express');
 const app = express();
+const port = 3000;
 
-// Define a basic route
-app.get('/', (req, res) => {
-  res.send('Hello! This is the home page.');
+// Middleware to parse JSON
+app.use(express.json());
+
+// In-memory data storage
+let resources = [];
+
+// Route: GET all resources
+app.get('/resources', (req, res) => {
+  res.json(resources);
 });
 
-// Handling a route with a parameter
-app.get('/user/:name', (req, res) => {
-  const userName = req.params.name;
-  res.send(`Hello, ${userName}!`);
+// Route: POST to add a new resource
+app.post('/resources', (req, res) => {
+  const resource = req.body;
+
+  if (!resource.id || !resource.name) {
+    return res.status(400).json({ error: 'Resource must have id and name' });
+  }
+
+  // Check for duplicate ID
+  const exists = resources.some(r => r.id === resource.id);
+  if (exists) {
+    return res.status(409).json({ error: 'Resource with this ID already exists' });
+  }
+
+  resources.push(resource);
+  res.status(201).json({ message: 'Resource added successfully', resource });
 });
 
-// Handling a route with query parameters
-app.get('/search', (req, res) => {
-  const keyword = req.query.q;
-  res.send(`You searched for: ${keyword}`);
-});
+// Route: DELETE a resource by ID
+app.delete('/resources/:id', (req, res) => {
+  const id = req.params.id;
+  const index = resources.findIndex(r => r.id === id);
 
-// URL building example
-app.get('/url', (req, res) => {
-  const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-  res.send(`Full URL: ${fullUrl}`);
+  if (index === -1) {
+    return res.status(404).json({ error: 'Resource not found' });
+  }
+
+  const deleted = resources.splice(index, 1);
+  res.json({ message: 'Resource deleted successfully', deleted });
 });
 
 // Start server
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
 });
