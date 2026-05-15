@@ -281,22 +281,22 @@ public class pattern {
     }
     static void pattern20(int n){
         System.out.println("Pattern 20");
-         int spaces = 2 * n - 2;
-        for (int i = 1; i <= 2 * n - 1; i++) {
-            int stars = i;
-            if (i > n) stars = 2 * n - i;
-            for (int j = 1; j <= stars; j++) {
-                System.out.print("*");
-            }
-            for (int j = 1; j <= spaces; j++) {
-                System.out.print(" ");
-            }
-            for (int j = 1; j <= stars; j++) {
-                System.out.print("*");
-            }
+       int n = 5;
+        int inis = 2 * (n - 1);
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) System.out.print("*"); 
+            for (int j = 1; j <= inis; j++) System.out.print(" "); 
+            for (int j = 1; j <= i; j++) System.out.print("*"); 
             System.out.println();
-            if (i < n) spaces -= 2;
-            else spaces += 2;
+            inis -= 2;
+        }
+        inis = 0;
+        for (int i = n; i >= 1; i--) {
+            for (int j = 1; j <= i; j++) System.out.print("*");
+            for (int j = 1; j <= inis; j++) System.out.print(" ");
+            for (int j = 1; j <= i; j++) System.out.print("*");
+            System.out.println();
+            inis += 2;
         }
     }
     static void pattern21(int n){
