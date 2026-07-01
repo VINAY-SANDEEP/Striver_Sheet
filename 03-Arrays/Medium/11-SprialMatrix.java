@@ -3,7 +3,7 @@ public class lConsecutive{
     public static void main(String[] args){
        int[][] nums = {{1,1,1},{1,0,1},{1,1,1}};
        spiralOrder(nums);
-        System.out.println(Arrays.deepToString(nums));
+        System.out.println(Arrays.deepToString(nums))
     }
  public List<Integer> spiralOrder(int[][] matrix) {
         ArrayList<Integer> list = new ArrayList<>();
